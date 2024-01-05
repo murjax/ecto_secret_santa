@@ -1,5 +1,6 @@
 defmodule EctoSecretSanta.User do
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "users" do
     field :name, :string
@@ -14,5 +15,11 @@ defmodule EctoSecretSanta.User do
     has_many :sender_thank_yous, EctoSecretSanta.ThankYou, foreign_key: :sender_id
     has_many :recipient_thank_yous, EctoSecretSanta.ThankYou, foreign_key: :recipient_id
     timestamps(inserted_at: :created_at, type: :utc_datetime)
+  end
+
+  def changeset(user, params \\ %{}) do
+    user
+    |> cast(params, [:name, :email, :hashed_password, :avatar_url])
+    |> validate_required([:name, :email])
   end
 end
