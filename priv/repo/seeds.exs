@@ -33,7 +33,7 @@ defmodule EctoSecretSanta.Seeder do
   def build_event do
     %Event{
       name: Faker.Lorem.word() |> String.capitalize,
-      date: DateTime.utc_now |> DateTime.add(2, :day) |> DateTime.truncate(:second),
+      date: DateTime.utc_now |> DateTime.add(-10, :day) |> DateTime.truncate(:second),
       send_reminder: true,
       invites: build_invites()
     }
